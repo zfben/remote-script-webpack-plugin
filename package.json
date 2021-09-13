@@ -1,0 +1,13 @@
+{
+  "name": "remote-script-webpack-plugin",
+  "version": "1.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/zfben/remote-script-webpack-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zfben/remote-script-webpack-plugin.git"
+  },
+  "peerDependencies": {
+    "webpack": ">=5.0.0"
+  }
+}

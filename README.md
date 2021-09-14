@@ -1,6 +1,12 @@
 # Remote Script Webpack Plugin
 
-Load remote script to webpack module base on ModuleFederationPlugin
+Load remote script like externals.
+
+## Difference from `externals`
+
+Use `externals` to load script for all page.
+
+Use `remoteScriptWebpackPlugin` to load script for page when it need the special remote script.
 
 ## Installation
 
@@ -10,13 +16,13 @@ Load remote script to webpack module base on ModuleFederationPlugin
 
 ```js
 // webpack.config.js
-const remoteScriptWebpackPlugin = require('remote-script-webpack-plugin')
+const remoteScript = require('remote-script-webpack-plugin')
 
 module.exports = {
   ...
   plugins: [
-    remoteScriptWebpackPlugin('lodash', 'https://cdn.jsdelivr.net/npm/lodash'),
-    remoteScriptWebpackPlugin('XLSX', 'https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js'),
+    remoteScript('lodash', '_', 'https://cdn.jsdelivr.net/npm/lodash'),
+    remoteScript('xlsx', 'XLSX', 'https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js'),
   ]
 }
 ```

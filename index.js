@@ -1,20 +1,28 @@
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
 
-let remotes = 0
-
-function remoteScript(origin, url) {
-  remotes++
+/**
+ * Load remote script like externals
+ * 
+ * @param {string} packageName npm package name
+ * @param {string} globalVariable name of global variable from remote script
+ * @param {string} url remote script's url
+ * 
+ * @example
+ * remoteScriptWebpackPlugin('lodash', '_', 'https://cdn.jsdelivr.net/npm/lodash')
+ * remoteScriptWebpackPlugin('xlsx', 'XLSX', 'https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js')
+ */
+function remoteScript(packageName, globalVariable, url) {
   return new ModuleFederationPlugin({
-    name: origin,
+    name: packageName,
     remotes: {
-      [remotes]: `promise new Promise(function (resolve) {
+      [packageName]: `promise new Promise(function (resolve) {
         var script = document.createElement('script')
         script.src = '${url}'
         script.onload = function () {
           resolve({
             get () {
               return function () {
-                return window['${origin}']
+                return window['${globalVariable}']
               }
             }
           })
